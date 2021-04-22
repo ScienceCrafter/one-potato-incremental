@@ -1,0 +1,124 @@
+<html>
+  <head>
+    <title>One Potato Incremental v0.0</title>
+    <script type="text/javascript" src="js/icons.js"></script>
+    <script type="text/javascript" src="js/inventory.js"></script>
+    <script type="text/javascript" src="js/crafting.js"></script>
+    <script type="text/javascript" src="js/garden.js"></script>
+    <script type="text/javascript" src="js/lab.js"></script>
+    <script type="text/javascript" src="js/shop.js"></script>
+    <script type="text/javascript" src="js/navigation.js"></script>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="sprites/icon.png" type="image/x-icon">
+  <head>
+  <body>
+    <p>One Potato Incremental, a minimalist farming simulator (v0.0)</p>
+
+    <table style="height:100%;">
+    <tr>
+    <td style="width:220px;">
+      <h3>- Inventory -</h3>
+      <div id="potato"><img src="sprites/potato1.png"></img></div>
+      <ul>
+      <li>
+        <span>
+          <img src="sprites/seeds_icon.png" class="icon"></img>
+        </span>
+        <span id="seeds">No seeds</span>
+      </li>
+      <li>
+        <span>
+          <img src="sprites/dna_icon.png" class="icon"></img>
+        </span>
+        <span id="potato_dna">No potato dna</span>
+      </li>
+      <li>
+        <span>
+          <img src="sprites/coin_icon.png" class="icon"></img>
+        </span>
+        <span id="coins">No coins</span>
+      </li>
+    </ul>
+
+      <h3>- Crafting -</h3>
+      <button onclick="makeSeeds()">Turn potato into seeds</button>
+      <p id="make_seeds_auto_p" style="display:none;margin:0px;">
+        <input type="checkbox" id="make_seeds_auto"></input>
+        auto
+      </p>
+      <button onclick="sellPotato()">Sell your potato</button>
+      </div>
+    </td>
+
+    <td>
+      <table style="height:100%;">
+      <tr style="height:220px;">
+        <td>
+          <table style="height:100%">
+            <tr>
+              <td style="width:200px">
+              <div id="plot"></div>
+              <div id="plot_progress_bar_vessel">
+                <div id="plot_progress_bar_bar"></div>
+              </div>
+              </td>
+              <td>
+              <p id="plot_info">No potato is growing here</p>
+              <button onclick="plant()">Plant a seed</button>
+              <p id="plant_auto_p" style="display:none;margin:0px;">
+                <input type="checkbox" id="plant_auto"></input>
+                auto
+              </p>
+              <br>
+              <button onclick="harvest()">Harvest</button>
+              <p id="harvest_auto_p" style="display:none;margin:0px;">
+                <input type="checkbox" id="harvest_auto"></input>
+                auto
+              </p>
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+
+      <tr style="height:0px;">
+        <td>
+        <button onclick="navigate('lab')">Lab</button>
+        <button onclick="navigate('shop')">Shop</button>
+        <button disabled>Kitchen (WIP)</button>
+        <button disabled>Prestige (WIP)</button>
+        <button disabled>Achievements (WIP)</button>
+        <button disabled>Settings (WIP)</button>
+        <a href="https://discord.gg/GWaSqa6BZn" target="_blank"><button style="color:blue"><u>Discord</u><span><img src='sprites/discord_icon.png' class='small_icon'></img></span></button></a>
+        </td>
+      </tr>
+
+      <tr>
+        <td>
+        <div id="lab_tab" style="display:none;">
+          <h3>- The Lab -</h3>
+          <p>Research</p>
+          <button onclick="seedResearch()" id="seed_research">Research Seeds <br>1<span><img src='sprites/seeds_icon.png' class='small_icon'></img></span></button>
+          <button onclick="seedResearchMax()" id="seed_research_max" style="display:none;">Max</button><br>
+          <button onclick="potatoStudy()" id="potato_study">Study your potato [0/5]</button>
+          <p>DNA Upgrades</p>
+          <button onclick="seedUpgrade()" id="seed_upgrade">Seeds per potato [2]<br>1<span><img src='sprites/dna_icon.png' class='small_icon'></img></span></button><br>
+          <button onclick="speedUpgrade()" id="speed_upgrade">Growth speed [1]<br>1<span><img src='sprites/dna_icon.png' class='small_icon'></img></span></button>
+          <br>
+        </div>
+
+        <div id="shop_tab" style="display:none;">
+          <h3>- The Shop -</h3>
+          <button onclick="autoSeeder()" id="buy_auto_seeder">Auto Seed Crafter<br>5<span><img src='sprites/coin_icon.png' class='small_icon'></img></span></button><br>
+          <button onclick="autoPlanter()" id="buy_auto_planter">Auto Planter <br>25<span><img src='sprites/coin_icon.png' class='small_icon'></img></span></button><br>
+          <button onclick="autoHarvest()" id="buy_auto_harvest">Auto Harvest <br>200<span><img src='sprites/coin_icon.png' class='small_icon'></img></span></button><br>
+          <button onclick="buyFertilizer()" id="buy_fertilizer">Buy Fertilizer [0/5]<br>5<span><img src='sprites/coin_icon.png' class='small_icon'></img></span></button>
+        </div>
+        </td>
+      </tr>
+      </table>
+    </td>
+    </tr>
+    </table>
+  </body>
+</html>

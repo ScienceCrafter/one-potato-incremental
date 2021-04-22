@@ -1,0 +1,77 @@
+
+table {
+  width: 100%;
+  border: 1px;
+  border-style: solid;
+  background: #bbb;
+}
+
+td {
+  vertical-align: top;
+  border: 1px;
+  border-style: solid;
+  background: #ddd;
+  padding: 3px;
+}
+
+ul {
+  list-style: none;
+  padding-left: 5px;
+}
+
+li {
+  padding: 2px;
+}
+
+#inventory_div {
+  width: 250px;
+  float: left;
+  height: 100%;
+}
+
+#garden_div {
+  display: block;
+  width: 100%;
+}
+
+#potato {
+  background: #888;
+  height: 200px;
+  width: 200px;
+  border: 3px solid;
+  margin: auto;
+}
+
+#plot {
+  background: #864;
+  height: 180px;
+  width: 200px;
+  border: 3px solid;
+  border-bottom: none;
+}
+
+#plot_progress_bar_vessel {
+  width: 200px;
+  height: 20px;
+  background-color: gray;
+  border: 3px solid;
+}
+
+#plot_progress_bar_bar {
+  width: 0%;
+  height: 100%;
+  background-color: #f00;
+}
+
+img.icon {
+  height: 20px;
+  width: 20px;
+  vertical-align: bottom;
+}
+
+img.small_icon {
+  height: 12px;
+  width: 12px;
+  margin-left: 2px;
+  margin-right: 2px;
+}
