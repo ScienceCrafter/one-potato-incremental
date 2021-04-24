@@ -41,10 +41,12 @@ function seedResearchMax() {
     seed_research_cost += 1
   }
   document.getElementById("seed_research").innerHTML = "Research Seeds (" + seed_research_cost + ")"
+  if (seeds <= 0) {
+    seeds += 1
+    updateSeedsText()
+  }
 }
-if (seeds <= 0) {
-  seeds += 1
-}
+
 
 function seedUpgrade() {
   if (potato_dna < seed_upgrade_cost) {
@@ -69,7 +71,7 @@ function speedUpgrade() {
 }
 
 function potatoStudy() {
-  if (have_potato == true && potato_stage == study_level && seeds != 0) {
+  if (have_potato == true && potato_tier == study_level && seeds != 0) {
     have_potato = false
     if (study_progress == 4) {
       study_progress = 0

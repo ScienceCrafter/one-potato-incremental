@@ -2,6 +2,7 @@
 var colors = ["#f00","#f80","#ff0","#0f0","#0ff","#00f","#f0f","#f00","#f80"]
 var potato_planted = false
 var growth_progress = 0
+var auto_plant
 var auto_grow = undefined
 var potato_stage = 1
 var potato_stages = [
@@ -69,10 +70,12 @@ function autoGrow() {
 
 
 function plant() {
-  if (potato_planted == true || seeds == 0 || have_potato) {
+  if (potato_planted == true || (have_potato == true && seeds == 0)) {
     return
   }
-  seeds -= 1
+  if (seeds >= 0) {
+    seeds -= 1
+  }
   updateSeedsText()
   potato_planted = true
   potato_stage = 0
@@ -80,6 +83,9 @@ function plant() {
 }
 
 function harvest() {
+  if (!document.getElementById("plant_auto").checked) {
+    clearInterval(auto_plant)
+  }
   if (potato_stage == 0 || !potato_planted) {
     return
   }
@@ -88,11 +94,13 @@ function harvest() {
   potato_planted = false
   updatePlotText()
   have_potato = true
+  potato_tier = potato_stage
   if (document.getElementById("make_seeds_auto").checked) {
     makeSeeds()
   }
   if (document.getElementById("plant_auto").checked) {
     plant()
+    auto_plant = setInterval(plant(),1000) // we keep trying until it works
   }
   updatePotatoText()
   document.getElementById("plot_progress_bar_vessel").style.background = "#888"

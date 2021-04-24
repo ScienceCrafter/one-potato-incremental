@@ -1,5 +1,6 @@
 
 var have_potato = true
+var potato_tier = 1
 var seeds = 0
 var potato_dna = 0
 var coins = 0

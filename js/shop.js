@@ -48,6 +48,7 @@ function autoHarvest() {
     return
   }
   coins -= 200
+  updateCoinsText()
   document.getElementById("buy_auto_harvest").style.display = "none"
   document.getElementById("harvest_auto_p").style.display = "inline-block"
   document.getElementById("harvest_auto").checked = true
