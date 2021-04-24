@@ -26,7 +26,7 @@ var potato_stage_text = [
   "Blue Potato",
   "8bit Potato"
 ]
-var potato_stage_requirements = [100,500,3000,5000,20000,100000,500000,2560000]
+var potato_stage_requirements = [100,600,3000,5000,20000,100000,500000,2560000]
 
 function updatePlotText() {
   if (potato_planted == false) {
@@ -86,7 +86,7 @@ function harvest() {
   if (!document.getElementById("plant_auto").checked) {
     clearInterval(auto_plant)
   }
-  if (potato_stage == 0 || !potato_planted) {
+  if (potato_stage == 0 || !potato_planted || have_potato == true) {
     return
   }
   clearInterval(auto_grow)

@@ -11,7 +11,7 @@ function makeSeeds() {
 function sellPotato() {
   if (have_potato == true && seeds > 0) {
     have_potato = false
-    coins += 1 * 10**(potato_tier-1)
+    coins += 1 * 7**(potato_tier-1)
   }
   updatePotatoText()
   updateCoinsText()

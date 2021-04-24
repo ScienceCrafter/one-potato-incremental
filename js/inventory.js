@@ -9,7 +9,7 @@ function updatePotatoText() {
   if (have_potato == false) {
     document.getElementById("potato").innerHTML = "<img src='sprites/potato_empty.png'></img>"
   } else {
-    document.getElementById("potato").innerHTML = potato_stages[potato_stage]
+    document.getElementById("potato").innerHTML = potato_stages[potato_tier]
   }
 }
 
