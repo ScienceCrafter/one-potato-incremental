@@ -91,9 +91,6 @@ function harvest() {
   if (document.getElementById("make_seeds_auto").checked) {
     makeSeeds()
   }
-  if (document.getElementById("plant_auto").checked) {
-    plant()
-  }
   updatePotatoText()
   document.getElementById("plot_progress_bar_vessel").style.background = "#888"
   document.getElementById("plot_progress_bar_bar").style.background = "#f00"
