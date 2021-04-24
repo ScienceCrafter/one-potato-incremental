@@ -6,6 +6,9 @@ function makeSeeds() {
   }
   updatePotatoText()
   updateSeedsText()
+  if (document.getElementById("plant_auto").checked) {
+    plant()
+  }
 }
 
 function sellPotato() {
@@ -15,4 +18,7 @@ function sellPotato() {
   }
   updatePotatoText()
   updateCoinsText()
+  if (document.getElementById("plant_auto").checked) {
+    plant()
+  }
 }

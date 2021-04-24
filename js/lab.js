@@ -80,5 +80,8 @@ function potatoStudy() {
     }
     document.getElementById("potato_study").innerHTML = "Study your potato [" + study_progress + "/5]"
     updatePotatoText()
+    if (document.getElementById("plant_auto").checked) {
+      plant()
+    }
   }
 }
