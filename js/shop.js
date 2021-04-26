@@ -14,6 +14,7 @@ function autoSeeder() {
   document.getElementById("buy_auto_seeder").style.display = "none"
   document.getElementById("make_seeds_auto_p").style.display = "inline-block"
   document.getElementById("make_seeds_auto").checked = true
+  awardAchievement(0,1)
 }
 
 function autoPlanter() {
@@ -38,6 +39,7 @@ function buyFertilizer() {
   fertilizer_level += 1
   fertilizer_price *= 100
   document.getElementById("buy_fertilizer").innerHTML = "Buy fertilizer [" + fertilizer_level + "/5]<br>" + fertilizer_price + icons[2]
+  awardAchievement(2,1)
   if (fertilizer_level == 5) {
     document.getElementById("buy_fertilizer").style.display = "none"
   }
@@ -53,4 +55,5 @@ function autoHarvest() {
   document.getElementById("harvest_auto_p").style.display = "inline-block"
   document.getElementById("harvest_auto").checked = true
   document.getElementById("harvest_auto").innerHTML = "auto"
+  awardAchievement(1,1)
 }

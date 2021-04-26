@@ -105,4 +105,13 @@ function harvest() {
   updatePotatoText()
   document.getElementById("plot_progress_bar_vessel").style.background = "#888"
   document.getElementById("plot_progress_bar_bar").style.background = "#f00"
+  if (potato_tier == 3) {
+    awardAchievement(3,0)
+  } else if (potato_tier == 4) {
+    awardAchievement(4,0)
+  } else if (potato_tier == 6) {
+    awardAchievement(5,0)
+  } else if (potato_tier == 8) {
+    awardAchievement(6,0)
+  }
 }

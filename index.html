@@ -1,18 +1,20 @@
 <html>
   <head>
-    <title>One Potato Incremental v0.0.2</title>
+    <title>One Potato Incremental v0.1</title>
     <script type="text/javascript" src="js/icons.js"></script>
     <script type="text/javascript" src="js/inventory.js"></script>
     <script type="text/javascript" src="js/crafting.js"></script>
     <script type="text/javascript" src="js/garden.js"></script>
     <script type="text/javascript" src="js/lab.js"></script>
     <script type="text/javascript" src="js/shop.js"></script>
+    <script type="text/javascript" src="js/kitchen.js"></script>
+    <script type="text/ecmascript" src="js/achievement.js"></script>
     <script type="text/javascript" src="js/navigation.js"></script>
     <link rel="stylesheet" href="style.css">
     <link rel="icon" href="sprites/icon.png" type="image/x-icon">
   <head>
   <body>
-    <p>One Potato Incremental, a minimalist farming simulator (v0.0.2) <span style="color:red;font-size:12px;">[warning: game does not save]</span></p>
+    <p>One Potato Incremental, a minimalist farming simulator (v0.1) <span style="color:red;font-size:12px;">[warning: game does not save]</span></p>
 
     <table style="height:100%;">
     <tr>
@@ -46,7 +48,7 @@
         <input type="checkbox" id="make_seeds_auto"></input>
         auto
       </p>
-      <button onclick="sellPotato()">Sell your potato</button>
+      <button onclick="sellPotato()" id="sell_potato" style="display:none;">Sell your potato</button>
       </div>
     </td>
 
@@ -83,11 +85,11 @@
 
       <tr style="height:0px;">
         <td>
-        <button onclick="navigate('lab')">Lab</button>
-        <button onclick="navigate('shop')">Shop</button>
-        <button disabled>Kitchen (WIP)</button>
+        <button onclick="navigate('lab')" id="lab_tab_button" disabled>Lab</button>
+        <button onclick="navigate('shop')" id="shop_tab_button" disabled>Shop</button>
+        <button onclick="navigate('kitchen')" id="kitchen_tab_button" disabled>Kitchen</button>
         <button disabled>Prestige (WIP)</button>
-        <button disabled>Achievements (WIP)</button>
+        <button onclick="navigate('achievement')" id="achievement_tab_button" disabled>Achievements</button>
         <button disabled>Settings (WIP)</button>
         <a href="https://discord.gg/GWaSqa6BZn" target="_blank"><button style="color:blue"><u>Discord</u><span><img src='sprites/discord_icon.png' class='small_icon'></img></span></button></a>
         </td>
@@ -113,6 +115,98 @@
           <button onclick="autoPlanter()" id="buy_auto_planter">Auto Planter <br>25<span><img src='sprites/coin_icon.png' class='small_icon'></img></span></button><br>
           <button onclick="autoHarvest()" id="buy_auto_harvest">Auto Harvest <br>200<span><img src='sprites/coin_icon.png' class='small_icon'></img></span></button><br>
           <button onclick="buyFertilizer()" id="buy_fertilizer">Buy Fertilizer [0/5]<br>5<span><img src='sprites/coin_icon.png' class='small_icon'></img></span></button>
+        </div>
+        <div id="kitchen_tab" style="display:none;">
+          <h3>- The Kitchen -</h3>
+          <table>
+          <tr>
+            <td id="plate"></td>
+            <td>
+            <div id="food_options" style="display:none;">
+              <p id="food_info">Baked Potato, Tier 1</p>
+              <button onclick="eatFood()" id="eat_food">Eat It</button>
+              <button onclick="sellFood()">Sell It</button>
+            </div>
+            </td>
+          </tr>
+          </table><br>
+          <button onclick="makeBakedPotato()" id="make_baked_potato">Bake Your Potato</button>
+        </div>
+        <div id="achievement_tab" style="display:none;">
+          <h3>- Achievements -</h3>
+          <table>
+            <tr>
+              <td id="achievement_0_0">
+                <b>Seeded Potatoes?</b><br><br>
+                Turn your potato into seeds<br><br>
+                (unlocks the lab)
+              </td>
+              <td id="achievement_1_0">
+                <b>Gene Modification</b><br><br>
+                Upgrade the dna of your potato<br><br>
+              </td>
+              <td id="achievement_2_0">
+                <b>Potato Life: Evolution</b><br><br>
+                Study your potato 5 times and unlock tier 2<br><br>
+                (unlocks the shop)
+              </td>
+              <td id="achievement_3_0">
+                <b>Mediocrity</b><br><br>
+                Harvest a meh potato<br><br>
+                (unlocks the kitchen)
+              </td>
+              <td id="achievement_4_0">
+                <b>Robust</b><br><br>
+                Harvest a robust potato<br><br>
+              </td>
+              <td id="achievement_5_0">
+                <b>Smooth</b><br><br>
+                Harvest a smooth potato<br><br>
+              </td>
+              <td id="achievement_6_0">
+                <b>Retro</b><br><br>
+                Harvest an 8-bit potato<br><br>
+              </td>
+              <td id="achievement_7_0">
+                <b>Real Gamer</b><br><br>
+                Play 1 hour<br><br>
+              </td>
+            </tr>
+            <tr>
+              <td id="achievement_0_1">
+                <b>Tinkerer</b><br><br>
+                Unlock the autoseeder<br><br>
+              </td>
+              <td id="achievement_1_1">
+                <b>Age Of Automation</b><br><br>
+                Unlock the autoharvester<br><br>
+              </td>
+              <td id="achievement_2_1">
+                <b>Epic Dirt</b><br><br>
+                Buy some fertilizer<br><br>
+              </td>
+              <td id="achievement_3_1">
+                <b>Potato Entreprenuer</b><br><br>
+                Get 1 million coins<br><br>
+              </td>
+              <td id="achievement_4_1">
+                <b>Potato Tycoon</b><br><br>
+                Get 1 billion coins<br><br>
+              </td>
+              <td id="achievement_5_1">
+                <b>Cooking with Taters</b><br><br>
+                Bake a potato<br><br>
+              </td>
+              <td id="achievement_6_1">
+                <b>Delicious!</b><br><br>
+                Eat a tier 8 baked potato<br><br>
+              </td>
+              <td id="achievement_7_1">
+                <b>Why Are We Still Here?</b><br><br>
+                Play for 20 hours<br><br>
+              </td>
+            </tr>
+          </table>
         </div>
         </td>
       </tr>

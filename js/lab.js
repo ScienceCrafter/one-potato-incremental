@@ -40,7 +40,7 @@ function seedResearchMax() {
   if (seed_research_cost < 10) {
     seed_research_cost += 1
   }
-  document.getElementById("seed_research").innerHTML = "Research Seeds (" + seed_research_cost + ")"
+  document.getElementById("seed_research").innerHTML = "Research Seeds <br>" + 10 + icons[0]
   if (seeds <= 0) {
     seeds += 1
     updateSeedsText()
@@ -57,6 +57,7 @@ function seedUpgrade() {
   seed_upgrade_cost = Math.floor(seed_upgrade_cost * 1.15) + 1
   seed_upgrade_level += 1
   document.getElementById("seed_upgrade").innerHTML = "Seeds per potato [" + (seed_upgrade_level + 2) + "]<br>" + seed_upgrade_cost + icons[1]
+  awardAchievement(1,0)
 }
 
 function speedUpgrade() {
@@ -68,6 +69,7 @@ function speedUpgrade() {
   speed_upgrade_cost = Math.floor(speed_upgrade_cost * 1.15) + 1
   speed_upgrade_level += 1
   document.getElementById("speed_upgrade").innerHTML = "Growth speed [" + (speed_upgrade_level + 1) + "]<br>" + speed_upgrade_cost + icons[1]
+  awardAchievement(1,0)
 }
 
 function potatoStudy() {
@@ -77,6 +79,7 @@ function potatoStudy() {
       study_progress = 0
       study_level += 1
       max_potato_tier += 1
+      awardAchievement(2,0)
     } else {
       study_progress += 1
     }

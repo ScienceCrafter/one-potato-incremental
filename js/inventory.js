@@ -32,4 +32,10 @@ function updateCoinsText() {
     document.getElementById("coins").innerHTML = "No coins"
   }
   document.getElementById("coins").innerHTML = coins
+  if (coins >= 1000000) {
+    awardAchievement(3,1)
+    if (coins >= 1000000000) {
+      awardAchievement(4,1)
+    }
+  }
 }
