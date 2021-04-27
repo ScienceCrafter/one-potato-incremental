@@ -1,5 +1,5 @@
 
-var achievements = []
+var achievements = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
 var play_time = 0
 
 function incrementPlayTime() {
@@ -15,10 +15,10 @@ function incrementPlayTime() {
 incrementPlayTime()
 
 function awardAchievement(x,y) {
-  if (achievements.includes("["+x+","+y+"]")) {
+  if (achievements[x+(8*y)] == 1) {
     return
   }
-  achievements.push("["+x+","+y+"]")
+  achievements[x+(8*y)] = 1
   document.getElementById("achievement_"+x+"_"+y).style.background = "#8f8"
   if (active_tab != "achievement") {
     document.getElementById("achievement_tab_button").style["background-color"] = "#8f8"

@@ -1,7 +1,6 @@
 
 var seed_research_cost = 1
 
-var study_level = 1
 var study_progress = 0
 
 var seed_upgrade_cost = 1
@@ -73,11 +72,10 @@ function speedUpgrade() {
 }
 
 function potatoStudy() {
-  if (have_potato == true && potato_tier == study_level && seeds != 0) {
+  if (have_potato == true && potato_tier == max_potato_tier && seeds != 0) {
     have_potato = false
     if (study_progress == 4) {
       study_progress = 0
-      study_level += 1
       max_potato_tier += 1
       awardAchievement(2,0)
     } else {

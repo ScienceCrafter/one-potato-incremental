@@ -1,6 +1,7 @@
 
 var auto_seeder_unlocked = false
 var auto_planter_unlocked = false
+var auto_harvest_unlocked = false
 var fertilizer_price = 5
 var fertilizer_level = 0
 
@@ -51,6 +52,7 @@ function autoHarvest() {
   }
   coins -= 200
   updateCoinsText()
+  auto_harvest_unlocked = true
   document.getElementById("buy_auto_harvest").style.display = "none"
   document.getElementById("harvest_auto_p").style.display = "inline-block"
   document.getElementById("harvest_auto").checked = true

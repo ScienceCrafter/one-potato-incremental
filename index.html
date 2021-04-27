@@ -1,6 +1,6 @@
 <html>
   <head>
-    <title>One Potato Incremental v0.1</title>
+    <title>One Potato Incremental v0.1.1</title>
     <script type="text/javascript" src="js/icons.js"></script>
     <script type="text/javascript" src="js/inventory.js"></script>
     <script type="text/javascript" src="js/crafting.js"></script>
@@ -14,7 +14,11 @@
     <link rel="icon" href="sprites/icon.png" type="image/x-icon">
   <head>
   <body>
-    <p>One Potato Incremental, a minimalist farming simulator (v0.1) <span style="color:red;font-size:12px;">[warning: game does not save]</span></p>
+    <p>One Potato Incremental, a minimalist farming simulator (v0.1.1)
+      <a href="https://discord.gg/GWaSqa6BZn" target="_blank"><button style="color:blue;">Discord<span><img src='sprites/discord_icon.png' class='small_icon'></img></span></button></a>
+      <a href="https://www.patreon.com/sciencecrafter" target="_blank"><button style="color:blue;">Patreon<span><img src='sprites/patreon_icon.png' class='small_icon'></img></span></button></a>
+    </p>
+
 
     <table style="height:100%;">
     <tr>
@@ -91,7 +95,7 @@
         <button disabled>Prestige (WIP)</button>
         <button onclick="navigate('achievement')" id="achievement_tab_button" disabled>Achievements</button>
         <button disabled>Settings (WIP)</button>
-        <a href="https://discord.gg/GWaSqa6BZn" target="_blank"><button style="color:blue"><u>Discord</u><span><img src='sprites/discord_icon.png' class='small_icon'></img></span></button></a>
+        <button onclick="saveGame()">Save</button><br>
         </td>
       </tr>
 
@@ -215,4 +219,7 @@
     </tr>
     </table>
   </body>
+  <script>
+    loadGame()
+  </script>
 </html>
