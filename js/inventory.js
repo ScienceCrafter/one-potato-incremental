@@ -41,6 +41,7 @@ function updateCoinsText() {
 }
 
 function saveGame() {
+  localStorage.setItem("local_game_saved",true)
   localStorage.setItem("local_have_potato",Number(have_potato))
   localStorage.setItem("local_potato_tier",potato_tier)
   localStorage.setItem("local_max_potato_tier",max_potato_tier)
@@ -63,6 +64,10 @@ function saveGame() {
 }
 
 function loadGame() {
+  if (localStorage.getItem("local_game_saved") != "true") {
+    console.log("no save was found")
+    return
+  }
   if (localStorage.getItem("local_have_potato") == "1") {
     have_potato = true
   } else {
