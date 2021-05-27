@@ -1,6 +1,6 @@
 <html>
   <head>
-    <title>One Potato Incremental v0.1.2</title>
+    <title>One Potato Incremental v0.2.0</title>
     <script type="text/javascript" src="js/icons.js"></script>
     <script type="text/javascript" src="js/inventory.js"></script>
     <script type="text/javascript" src="js/crafting.js"></script>
@@ -8,19 +8,26 @@
     <script type="text/javascript" src="js/lab.js"></script>
     <script type="text/javascript" src="js/shop.js"></script>
     <script type="text/javascript" src="js/kitchen.js"></script>
-    <script type="text/ecmascript" src="js/achievement.js"></script>
+    <script type="text/javascript" src="js/achievement.js"></script>
+    <script type="text/javascript" src="js/prestige.js"></script>
     <script type="text/javascript" src="js/navigation.js"></script>
+    <script type="text/javascript" src="js/news.js"></script>
     <link rel="stylesheet" href="style.css">
     <link rel="icon" href="sprites/icon.png" type="image/x-icon">
   <head>
   <body>
-    <p>One Potato Incremental, a minimalist farming simulator (v0.1.2)
+    <p>One Potato Incremental, a minimalist farming simulator (v0.2.0)
       <a href="https://discord.gg/GWaSqa6BZn" target="_blank"><button style="color:blue;">Discord<span><img src='sprites/discord_icon.png' class='small_icon'></img></span></button></a>
       <a href="https://www.patreon.com/sciencecrafter" target="_blank"><button style="color:blue;">Patreon<span><img src='sprites/patreon_icon.png' class='small_icon'></img></span></button></a>
     </p>
 
 
     <table style="height:100%;">
+    <tr>
+    <td id="news_bar" style="width:100%;height:25px;overflow:hidden;position:relative;" colspan="2">
+      <pre id="news"> </pre>
+    </td>
+    </tr>
     <tr>
     <td style="width:220px;">
       <h3>- Inventory -</h3>
@@ -43,6 +50,12 @@
           <img src="sprites/coin_icon.png" class="icon"></img>
         </span>
         <span id="coins">No coins</span>
+      </li>
+      <li>
+        <span>
+          <img src="sprites/mashed_potato_icon.png" class="icon"></img>
+        </span>
+        <span id="mashed_potatoes">No mashed potatoes</span>
       </li>
     </ul>
 
@@ -70,6 +83,7 @@
               </td>
               <td>
               <p id="plot_info">No potato is growing here</p>
+              <p id="time_to_grow" style="display:none;"></p>
               <button onclick="plant()">Plant a seed</button>
               <p id="plant_auto_p" style="display:none;margin:0px;">
                 <input type="checkbox" id="plant_auto"></input>
@@ -80,6 +94,7 @@
               <p id="harvest_auto_p" style="display:none;margin:0px;">
                 <input type="checkbox" id="harvest_auto"></input>
                 auto
+                <input type="number" value="0" id="harvest_auto_setting"></input>
               </p>
               </td>
             </tr>
@@ -92,7 +107,7 @@
         <button onclick="navigate('lab')" id="lab_tab_button" disabled>Lab</button>
         <button onclick="navigate('shop')" id="shop_tab_button" disabled>Shop</button>
         <button onclick="navigate('kitchen')" id="kitchen_tab_button" disabled>Kitchen</button>
-        <button disabled>Prestige (WIP)</button>
+        <button onclick="navigate('prestige')" id="prestige_tab_button" disabled>Prestige</button>
         <button onclick="navigate('achievement')" id="achievement_tab_button" disabled>Achievements</button>
         <button disabled>Settings (WIP)</button>
         <button onclick="saveGame()">Save</button>
@@ -110,7 +125,8 @@
           <button onclick="potatoStudy()" id="potato_study">Study your potato [0/5]</button>
           <p>DNA Upgrades</p>
           <button onclick="seedUpgrade()" id="seed_upgrade">Seeds per potato [2]<br>1<span><img src='sprites/dna_icon.png' class='small_icon'></img></span></button><br>
-          <button onclick="speedUpgrade()" id="speed_upgrade">Growth speed [1]<br>1<span><img src='sprites/dna_icon.png' class='small_icon'></img></span></button>
+          <button onclick="speedUpgrade()" id="speed_upgrade">Growth speed [1]<br>1<span><img src='sprites/dna_icon.png' class='small_icon'></img></span></button><br>
+          <button onclick="cloning()" id="cloning_upgrade">Cloning<br>500000<span><img src='sprites/dna_icon.png' class='small_icon'></img></span></button>
           <br>
         </div>
 
@@ -119,7 +135,7 @@
           <button onclick="autoSeeder()" id="buy_auto_seeder">Auto Seed Crafter<br>5<span><img src='sprites/coin_icon.png' class='small_icon'></img></span></button><br>
           <button onclick="autoPlanter()" id="buy_auto_planter">Auto Planter <br>25<span><img src='sprites/coin_icon.png' class='small_icon'></img></span></button><br>
           <button onclick="autoHarvest()" id="buy_auto_harvest">Auto Harvest <br>200<span><img src='sprites/coin_icon.png' class='small_icon'></img></span></button><br>
-          <button onclick="buyFertilizer()" id="buy_fertilizer">Buy Fertilizer [0/5]<br>5<span><img src='sprites/coin_icon.png' class='small_icon'></img></span></button>
+          <button onclick="buyFertilizer()" id="buy_fertilizer">Buy Fertilizer [0]<br>5<span><img src='sprites/coin_icon.png' class='small_icon'></img></span></button>
         </div>
         <div id="kitchen_tab" style="display:none;">
           <h3>- The Kitchen -</h3>
@@ -136,6 +152,20 @@
           </tr>
           </table><br>
           <button onclick="makeBakedPotato()" id="make_baked_potato">Bake Your Potato</button>
+          <button onclick="makeFries()" id="make_fries" disabled>Make Fries</button>
+          <button onclick="makeChips()" id="make_chips" disabled>Make Chips</button>
+        </div>
+        <div id="prestige_tab" style="display:none;">
+          <button onclick="prestige()">MASH YOUR POTATO</button>
+          <p>Mashing your potatoes resets most things but you will gain powerful mashed potatoes which multiply your growth speed quadratically (very strong boost) and can be used for special upgrades<br>(It is strongly recommended to have your highest available potato when mashing)</p>
+          <h3>- Mashed Potatoes -</h3>
+          <p id="mashed_potatoes_info">You have 0 mashed potatoes, granting you a bonus 1x potato growth speed</p>
+          <button id="prestige_upgrade_data" onclick="prestigeUpgradeData()">Data Decryption<br>2<span><img src='sprites/mashed_potato_icon.png' class='small_icon'></img></span></button><br>
+          <button id="prestige_upgrade_automators_retained" onclick="prestigeUpgradeAutomatorsRetained()">Robotic Retainment<br>10<span><img src='sprites/mashed_potato_icon.png' class='small_icon'></img></span></button><br>
+          <button disabled>Contemporary Cuisine (WIP)<br>200<span><img src='sprites/mashed_potato_icon.png' class='small_icon'></img></span></button><br>
+          <button id="prestige_upgrade_study_req" onclick="prestigeUpgradeStudyReq()">Swift Studies [0/4]<br>5<span><img src='sprites/mashed_potato_icon.png' class='small_icon'></img></span></button><br>
+          <h3>Something else?? [COMING SOON]</h3>
+          <button disabled="true">Trade 1 mashed potatoes<br>for ???? ??????????</button>
         </div>
         <div id="achievement_tab" style="display:none;">
           <h3>- Achievements -</h3>
@@ -167,10 +197,12 @@
               <td id="achievement_5_0">
                 <b>Smooth</b><br><br>
                 Harvest a smooth potato<br><br>
+                (unlocks fries)
               </td>
               <td id="achievement_6_0">
                 <b>Retro</b><br><br>
                 Harvest an 8-bit potato<br><br>
+                (unlocks prestige)
               </td>
               <td id="achievement_7_0">
                 <b>Real Gamer</b><br><br>
@@ -211,6 +243,41 @@
                 Play for 20 hours<br><br>
               </td>
             </tr>
+            <tr>
+              <td id="achievement_0_2">
+                <b>Twice baked, twice lived</b><br><br>
+                Mash your potato<br><br>
+              </td>
+              <td id="achievement_1_2">
+                <b>Also known as chips</b><br><br>
+                Make some fries<br><br>
+              </td>
+              <td id="achievement_2_2">
+                <b>Antipotato</b><br><br>
+                Obtain the antimatter potato<br><br>
+                (unlocks chips)
+              </td>
+              <td id="achievement_3_2">
+                <b>Copied Spuds</b><br><br>
+                Research potato cloning<br><br>
+              </td>
+              <td id="achievement_4_2">
+                <b>Airbags</b><br><br>
+                Make some chips<br><br>
+              </td>
+              <td id="achievement_5_2">
+                <b>Time spent wisely</b><br><br>
+                Play for 50 hours<br><br>
+              </td>
+              <td id="achievement_6_2" style="background:#f88;">
+                <b>Actually just a microwave</b><br><br>
+                Unlock contemporary cuisine<br><br>
+              </td>
+              <td id="achievement_7_2">
+                <b>You win a potato!</b><br><br>
+                Unlock the legendary potato<br><br>
+              </td>
+            </tr>
           </table>
         </div>
         </td>
@@ -222,5 +289,7 @@
   </body>
   <script>
     loadGame()
+    newNews()
+    setInterval(saveGame, 20000)
   </script>
 </html>

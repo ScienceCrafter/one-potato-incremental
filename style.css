@@ -71,6 +71,14 @@ li {
   padding: 0px;
 }
 
+#news {
+  position: absolute;
+  width: fit-content;
+  margin: 0px;
+  font-family:monospace;
+  font-size:15px;
+}
+
 img.icon {
   height: 20px;
   width: 20px;

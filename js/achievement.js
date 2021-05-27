@@ -1,14 +1,21 @@
 
-var achievements = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+var achievements = []
 var play_time = 0
 
 function incrementPlayTime() {
   play_time += 1
+  if (coins_per_second) {
+    coins += coins_per_second
+    updateCoinsText()
+  }
   setTimeout(incrementPlayTime,1000)
   if (play_time > 3600) {
     awardAchievement(7,0)
     if (play_time > 72000) {
       awardAchievement(7,1)
+      if (play_time > 180000) {
+        awardAchievement(5,2)
+      }
     }
   }
 }
@@ -31,5 +38,11 @@ function awardAchievement(x,y) {
     document.getElementById("sell_potato").style.display = "block"
   } else if (x == 3 && y == 0) {
     document.getElementById("kitchen_tab_button").disabled = false
+  } else if (x == 5 && y == 0) {
+    document.getElementById("make_fries").disabled = false
+  } else if (x == 6 && y == 0) {
+    document.getElementById("prestige_tab_button").disabled = false
+  } else if (x == 2 && y == 2) {
+    document.getElementById("make_chips").disabled = false
   }
 }
