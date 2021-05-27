@@ -86,6 +86,7 @@ function eatFood() {
 function sellFood() {
   var fry_multiplier = 1
   for (i=0; i<fry_bonus.length; i++) {
+    if(fry_bonus[i] === undefined) continue;
     fry_multiplier *= 1+(fry_bonus[i]/100)
   }
   coins += 2*8**(food_tier-1)*fry_multiplier
