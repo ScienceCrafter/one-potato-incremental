@@ -51,7 +51,8 @@ function updatePlotText() {
     document.getElementById("plot_progress_bar_bar").style.width = "0%"
   } else {
     document.getElementById("plot").innerHTML = potato_stages[potato_stage]
-    document.getElementById("plot_info").innerHTML = growth_progress + "/" + potato_stage_requirements[potato_stage] + "<br>Currently Tier " + potato_stage + " (" + (potato_stage_text[potato_stage] || "ERROR 404 POTATO NOT FOUND") + ")"
+    document.getElementById("plot_info").innerHTML = "Currently Tier " + potato_stage + " (" + (potato_stage_text[potato_stage] || "ERROR 404 POTATO NOT FOUND") + ")"
+    document.getElementById("growth_progress").innerHTML = growth_progress + "/" + potato_stage_requirements[potato_stage];
     document.getElementById("time_to_grow").innerHTML = Math.floor(growth_progress/((1 + speed_upgrade_level) * (mashed_potatoes + 1)) * (100 * (0.8**fertilizer_level)) / 1000) + " / " + Math.floor((potato_stage_requirements[potato_stage] || 1e150)/((1 + speed_upgrade_level) * (mashed_potatoes + 1)) * (100 * (0.8**fertilizer_level)) / 1000) + "s"
     if (potato_stage != max_potato_tier) {
       document.getElementById("plot_progress_bar_bar").style.width = 1+(growth_progress/potato_stage_requirements[potato_stage])*99 + "%"
