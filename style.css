@@ -53,8 +53,18 @@ li {
 #plot_progress_bar_vessel {
   width: 200px;
   height: 20px;
-  background-color: gray;
+  background-color: #aaa;
   border: 3px solid;
+  position: relative;
+  box-shadow: 0 0 2px 1px #777 inset;
+}
+
+#growth_progress {
+   position: absolute;
+   left: 50%;
+   top: 50%;
+   transform: translate(-50%, -50%);
+   text-shadow: 0 0 3px rgba(255, 255, 255, 0.4), 0 0 2px rgba(255, 255, 255, 0.6);
 }
 
 #plot_progress_bar_bar {
