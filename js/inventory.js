@@ -75,6 +75,9 @@ function saveGame() {
   localStorage.setItem("local_baked_potato_boost",baked_potato_boost)
   localStorage.setItem("local_study_req",study_req)
   localStorage.setItem("local_study_req_cost",study_req_cost)
+
+  localStorage.setItem("automation_harvest_potato_tier", document.getElementById("harvest_auto_setting").value)
+
   console.log("game saved")
 }
 
@@ -145,6 +148,9 @@ function loadGame() {
   if (study_req == 1) {
     document.getElementById("prestige_upgrade_study_req").disabled = "true"
   }
+  
+  document.getElementById("harvest_auto_setting").value = localStorage.getItem("automation_harvest_potato_tier")
+
 }
 
 var warning_triggered = false

@@ -1,8 +1,9 @@
+// Decreasing allows for more automation ticks. Be aware that this might cause performance issues.
+const automation_interval = 100
 
 var colors = ["#f00","#f80","#ff0","#0f0","#0ff","#00f","#f0f","#f00","#f80","#ff0","#0f0","#0ff","#00f","#f0f","#f00","#f80","#ff0","#0f0","#0ff","#00f","#f0f","#f00","#f80"]
 var potato_planted = false
 var growth_progress = 0
-var auto_plant
 var auto_grow = undefined
 var potato_stage = 1
 var potato_stages = [
@@ -99,16 +100,10 @@ function plant() {
 }
 
 function harvest() {
-  if (!document.getElementById("plant_auto").checked) {
-    clearInterval(auto_plant)
-  }
   if (potato_stage == 0 || !potato_planted) {
     return
   }
   if (have_potato == true) {
-    if (document.getElementById("harvest_auto").checked) {
-      setTimeout(harvest, 100)
-    }
     return
   }
   clearInterval(auto_grow)
@@ -117,13 +112,6 @@ function harvest() {
   updatePlotText()
   have_potato = true
   potato_tier = potato_stage
-  if (document.getElementById("make_seeds_auto").checked) {
-    makeSeeds()
-  }
-  if (document.getElementById("plant_auto").checked) {
-    plant()
-    auto_plant = setInterval(plant(),1000) // we keep trying until it works
-  }
   updatePotatoText()
   document.getElementById("plot_progress_bar_vessel").style.background = "#888"
   document.getElementById("plot_progress_bar_bar").style.background = "#f00"
@@ -141,3 +129,22 @@ function harvest() {
     awardAchievement(7,2)
   }
 }
+
+setInterval(function () {
+  if (!document.getElementById("harvest_auto").checked) return
+  if (potato_stage != max_potato_tier) return
+
+  harvest()
+}, automation_interval)
+
+setInterval(function () {
+  if (!document.getElementById("plant_auto").checked) return
+
+  plant()
+}, automation_interval)
+
+setInterval(function() {
+  if (!document.getElementById("make_seeds_auto").checked) return
+
+  makeSeeds()
+}, automation_interval)
