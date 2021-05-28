@@ -146,3 +146,19 @@ function loadGame() {
     document.getElementById("prestige_upgrade_study_req").disabled = "true"
   }
 }
+
+var warning_triggered = false
+
+function hardReset() {
+  if (warning_triggered == false) {
+    alert("Are you sure you want to reset EVERYTHING? (Press reset button again within the next 5 seconds)")
+    warning_triggered = true
+    setTimeout(function(){warning_triggered=false}, 4500)
+    return
+  }
+  document.getElementById("harvest_auto").checked = false;
+  document.getElementById("plant_auto").checked = false;
+  document.getElementById("make_seeds_auto").checked = false;
+  localStorage.setItem("local_game_saved",false)
+  location.reload()
+}

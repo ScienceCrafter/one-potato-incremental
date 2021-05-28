@@ -2,7 +2,7 @@
 var food_type
 var auto_food_selected = ""
 var food_tier = 0
-var fry_bonus = []
+var fry_bonus = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
 
 function makeBakedPotato() {
   if (have_potato == false || seeds == 0) {
