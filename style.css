@@ -91,3 +91,36 @@ img.small_icon {
   margin-left: 2px;
   margin-right: 2px;
 }
+
+/* tooltip stylings */
+
+
+/* class to add to any element that needs a tooltip */
+.toolTip {
+  position: relative;
+  display: inline-block;
+}
+
+.toolTip .toolTipText {
+  visibility: hidden;
+  width: 160px;
+  background-color: rgb(143, 143, 143);
+  color: black;
+  text-align: center;
+  padding: 5px 0;
+  border-color:rgb(48, 48, 48);
+  border-radius: 6px;
+  position: absolute;
+  z-index: 1;
+  bottom: 100%;
+  left: 50%;
+  margin-left: -80px;
+  opacity: 0;
+}
+
+
+.toolTip:hover .toolTipText {
+  transition: opacity 1s ease-in 1s;
+  visibility: visible;
+  opacity: 100;
+}

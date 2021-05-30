@@ -4,7 +4,6 @@ var auto_planter_unlocked = false
 var auto_harvest_unlocked = false
 var fertilizer_price = 5
 var fertilizer_level = 0
-var max_fertilizer_level = 5
 
 function autoSeeder() {
   if (coins < 5) {
