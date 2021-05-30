@@ -60,7 +60,7 @@
     </ul>
 
       <h3>- Crafting -</h3>
-      <button onclick="makeSeeds()">Turn potato into seeds</button>
+      <button onclick="makeSeeds()" id="make_seeds">Turn potato into seeds</button>
       <p id="make_seeds_auto_p" style="display:none;margin:0px;">
         <input type="checkbox" id="make_seeds_auto"></input>
         auto
@@ -84,13 +84,13 @@
               <td>
               <p id="plot_info">No potato is growing here</p>
               <p id="time_to_grow" style="display:none;"></p>
-              <button onclick="plant()">Plant a seed</button>
+              <button onclick="plant()" id="plant_button">Plant a seed</button>
               <p id="plant_auto_p" style="display:none;margin:0px;">
                 <input type="checkbox" id="plant_auto"></input>
                 auto
               </p>
               <br>
-              <button onclick="harvest()">Harvest</button>
+              <button onclick="harvest()" id="harvest_button">Harvest</button>
               <p id="harvest_auto_p" style="display:none;margin:0px;">
                 <input type="checkbox" id="harvest_auto"></input>
                 auto
@@ -109,10 +109,10 @@
         <button onclick="navigate('kitchen')" id="kitchen_tab_button" disabled>Kitchen</button>
         <button onclick="navigate('prestige')" id="prestige_tab_button" disabled>Prestige</button>
         <button onclick="navigate('achievement')" id="achievement_tab_button" disabled>Achievements</button>
-        <button disabled>Settings (WIP)</button>
-        <button onclick="saveGame()">Save</button>
-        <button onclick="loadGame()">Load</button>
-        <button onclick="hardReset()" style="color:#b00;">RESET</button>
+        <button disabled id="settings_tab_button">Settings (WIP)</button>
+        <button onclick="saveGame()" id="save_game_button">Save</button>
+        <button onclick="loadGame()" id="load_game_button">Load</button>
+        <button onclick="hardReset()" id="hard_reset_button" style="color:#b00;">RESET</button>
         </td>
       </tr>
 
@@ -292,5 +292,7 @@
     loadGame()
     newNews()
     setInterval(saveGame, 20000)
+    
   </script>
+  <script type="text/javascript" src="js/toolTips.js"></script>
 </html>
