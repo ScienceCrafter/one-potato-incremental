@@ -5,7 +5,7 @@ var play_time = 0
 function incrementPlayTime() {
   play_time += 1
   if (coins_per_second) {
-    coins += coins_per_second
+    coins += (coins_per_second * fry_multiplier)
     updateCoinsText()
   }
   setTimeout(incrementPlayTime,1000)
@@ -38,11 +38,16 @@ function awardAchievement(x,y) {
     document.getElementById("sell_potato").style.display = "block"
   } else if (x == 3 && y == 0) {
     document.getElementById("kitchen_tab_button").disabled = false
+  } else if (x == 4 && y == 0) {
+    document.getElementById("potatopedia_tab_button").disabled = false
   } else if (x == 5 && y == 0) {
     document.getElementById("make_fries").disabled = false
   } else if (x == 6 && y == 0) {
     document.getElementById("prestige_tab_button").disabled = false
   } else if (x == 2 && y == 2) {
     document.getElementById("make_chips").disabled = false
+    document.getElementById("auto_cook_3").classList.add("microwave_button");
+    document.getElementById("auto_cook_3").innerHTML = "3";
+    document.getElementById("auto_cook_3").disabled = false
   }
 }

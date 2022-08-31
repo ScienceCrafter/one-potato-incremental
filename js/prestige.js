@@ -1,9 +1,12 @@
 
-var baked_potato_boost = [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]
+var baked_potato_boost = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+var fry_boost = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
 var mashed_potatoes = 0
 var study_req = 5
 var study_req_cost = 5
 var retain_automators = false
+var autocook_unlocked = false
+
 
 function softReset() {
   have_potato = true
@@ -17,7 +20,7 @@ function softReset() {
   potato_dna = 0
   food_tier = 0
   fry_bonus = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
-  potato_stage_requirements = [100,600,3000,5000,20000,100000,500000,2560000,5000000,20000000,1e+9,1e+12,1e+16,1e+21,1e+27,1e+34]
+  potato_stage_requirements = [100,600,3000,5000,20000,100000,500000,2560000,5000000,20000000,1e+9,5e+11,1e+15,1e+21,1e+27,1e+34]
   fertilizer_price = 5
   fertilizer_level = 0
   seed_research_cost = 1
@@ -26,6 +29,13 @@ function softReset() {
   seed_upgrade_level = 0
   speed_upgrade_cost = 1
   speed_upgrade_level = 0
+  document.getElementById("harvest_auto").checked = false;
+  document.getElementById("plant_auto").checked = false;
+  document.getElementById("make_seeds_auto").checked = false;
+  if (!retain_automators) {
+    document.getElementById("buy_auto_seeder").disabled = false
+    document.getElementById("make_seeds_auto_p").style.display = "none"
+  }
   updatePotatoText()
   updateCoinsText()
   updateSeedsText()
@@ -50,17 +60,12 @@ function prestige() {
       baked_potato_boost[i] += 1
     }
   }
-  softReset()
-}
-
-function prestigeUpgradeData() {
-  if (mashed_potatoes < 2) {
-    return
+  for (i=0;i<fry_boost.length;i++) {
+    if (fry_bonus[i]==100+fry_boost[i] && fry_boost[i] != 200) {
+      fry_boost[i] += 1;
+    }
   }
-  mashed_potatoes -= 2
-  updateMashedPotatoText()
-  document.getElementById("prestige_upgrade_data").disabled = "true"
-  document.getElementById("time_to_grow").style.display = "block"
+  softReset()
 }
 
 function prestigeUpgradeAutomatorsRetained() {
@@ -71,6 +76,18 @@ function prestigeUpgradeAutomatorsRetained() {
   updateMashedPotatoText()
   retain_automators = true
   document.getElementById("prestige_upgrade_automators_retained").disabled = "true"
+}
+
+function prestigeUpgradeAutoCook() {
+  if (mashed_potatoes < 200) {
+    return
+  }
+  mashed_potatoes -= 200
+  updateMashedPotatoText()
+  autocook_unlocked = true
+  awardAchievement(6,2)
+  document.getElementById("autocooker_div").style.display = "block"
+  document.getElementById("prestige_upgrade_auto_cook").disabled = "true"
 }
 
 function prestigeUpgradeStudyReq() {

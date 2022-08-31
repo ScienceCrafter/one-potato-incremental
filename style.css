@@ -91,3 +91,17 @@ img.small_icon {
   margin-left: 2px;
   margin-right: 2px;
 }
+
+img.potatopedia_icon {
+  height: 50px;
+  width: 50px;
+  background-color: #bbb;
+}
+
+button.microwave_button {
+  width: 40px;
+  background-color: darkblue;
+  color: white;
+  font-style: bold;
+  font-family: monospace;
+}

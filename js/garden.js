@@ -42,16 +42,16 @@ var potato_stage_text = [
   "Ice Potato",
   "Legendary Potato"
 ]
-var potato_stage_requirements = [100,600,3000,5000,20000,100000,500000,2560000,5000000,20000000,1e+9,1e+12,1e+16,1e+21,1e+27,1e+34]
+var potato_stage_requirements = [100,600,3000,5000,20000,100000,500000,2560000,5000000,20000000,1e+9,5e+11,1e+15,1e+19,1e+22,1e+27]
 
 function updatePlotText() {
   if (potato_planted == false) {
     document.getElementById("plot").innerHTML = ""
-    document.getElementById("plot_info").innerHTML = "No potato is growing here"
+    document.getElementById("plot_info").innerHTML = "<br>No potato is growing here"
     document.getElementById("plot_progress_bar_bar").style.width = "0%"
   } else {
     document.getElementById("plot").innerHTML = potato_stages[potato_stage]
-    document.getElementById("plot_info").innerHTML = growth_progress + "/" + potato_stage_requirements[potato_stage] + "<br>Currently Tier " + potato_stage + " (" + (potato_stage_text[potato_stage] || "ERROR 404 POTATO NOT FOUND") + ")"
+    document.getElementById("plot_info").innerHTML = numberFormat(growth_progress,0,1) + "/" + numberFormat(potato_stage_requirements[potato_stage]) + "<br>Currently Tier " + potato_stage + " (" + (potato_stage_text[potato_stage] || "ERROR 404 POTATO NOT FOUND") + ")"
     document.getElementById("time_to_grow").innerHTML = Math.floor(growth_progress/((1 + speed_upgrade_level) * (mashed_potatoes + 1)) * (100 * (0.8**fertilizer_level)) / 1000) + " / " + Math.floor((potato_stage_requirements[potato_stage] || 1e150)/((1 + speed_upgrade_level) * (mashed_potatoes + 1)) * (100 * (0.8**fertilizer_level)) / 1000) + "s"
     if (potato_stage != max_potato_tier) {
       document.getElementById("plot_progress_bar_bar").style.width = 1+(growth_progress/potato_stage_requirements[potato_stage])*99 + "%"
@@ -71,6 +71,10 @@ function autoGrow() {
     auto_grow = setTimeout(autoGrow, 100 * (0.8**fertilizer_level))
   } else {
     potato_stage += 1
+    if (potato_stage > best_potato_seen) {
+      best_potato_seen += 1;
+      potatopediaUnlock(best_potato_seen);
+    }
     document.getElementById("plot_progress_bar_vessel").style.background = colors[potato_stage - 1]
     document.getElementById("plot_progress_bar_bar").style.background = colors[potato_stage]
     if (potato_stage != max_potato_tier) {
@@ -117,7 +121,18 @@ function harvest() {
   updatePlotText()
   have_potato = true
   potato_tier = potato_stage
-  if (document.getElementById("make_seeds_auto").checked) {
+  if (auto_cook_recipie != 0) {
+    if (auto_cook_recipie == 1) {
+      makeBakedPotato()
+    }
+    else if (auto_cook_recipie == 2) {
+      makeFries()
+    }
+    else if (auto_cook_recipie == 3) {
+      makeChips()
+    }
+  }
+  else if (document.getElementById("make_seeds_auto").checked) {
     makeSeeds()
   }
   if (document.getElementById("plant_auto").checked) {

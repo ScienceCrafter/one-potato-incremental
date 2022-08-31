@@ -1,22 +1,25 @@
 <html>
   <head>
-    <title>One Potato Incremental v0.2.0</title>
+    <title>One Potato Incremental v0.3.0</title>
     <script type="text/javascript" src="js/icons.js"></script>
+    <script type="text/javascript" src="js/number_format.js"></script>
     <script type="text/javascript" src="js/inventory.js"></script>
     <script type="text/javascript" src="js/crafting.js"></script>
     <script type="text/javascript" src="js/garden.js"></script>
     <script type="text/javascript" src="js/lab.js"></script>
     <script type="text/javascript" src="js/shop.js"></script>
     <script type="text/javascript" src="js/kitchen.js"></script>
+    <script type="text/javascript" src="js/potatopedia.js"></script>
     <script type="text/javascript" src="js/achievement.js"></script>
     <script type="text/javascript" src="js/prestige.js"></script>
     <script type="text/javascript" src="js/navigation.js"></script>
     <script type="text/javascript" src="js/news.js"></script>
+    <script type="text/javascript" src="js/settings.js"></script>
     <link rel="stylesheet" href="style.css">
     <link rel="icon" href="sprites/icon.png" type="image/x-icon">
   <head>
   <body>
-    <p>One Potato Incremental, a minimalist farming simulator (v0.2.0)
+    <p>One Potato Incremental, a minimalist farming simulator (v0.3.0)
       <a href="https://discord.gg/GWaSqa6BZn" target="_blank"><button style="color:blue;">Discord<span><img src='sprites/discord_icon.png' class='small_icon'></img></span></button></a>
       <a href="https://www.patreon.com/sciencecrafter" target="_blank"><button style="color:blue;">Patreon<span><img src='sprites/patreon_icon.png' class='small_icon'></img></span></button></a>
     </p>
@@ -69,7 +72,7 @@
       </div>
     </td>
 
-    <td>
+    <td style="width:100%;">
       <table style="height:100%;">
       <tr style="height:220px;">
         <td>
@@ -82,7 +85,7 @@
               </div>
               </td>
               <td>
-              <p id="plot_info">No potato is growing here</p>
+              <p id="plot_info"><br>No potato is growing here</p>
               <p id="time_to_grow" style="display:none;"></p>
               <button onclick="plant()">Plant a seed</button>
               <p id="plant_auto_p" style="display:none;margin:0px;">
@@ -94,7 +97,7 @@
               <p id="harvest_auto_p" style="display:none;margin:0px;">
                 <input type="checkbox" id="harvest_auto"></input>
                 auto
-                <input type="number" value="0" id="harvest_auto_setting"></input>
+                <input type="number" value="0" id="harvest_auto_setting" style="width:50px;"></input>
               </p>
               </td>
             </tr>
@@ -108,8 +111,9 @@
         <button onclick="navigate('shop')" id="shop_tab_button" disabled>Shop</button>
         <button onclick="navigate('kitchen')" id="kitchen_tab_button" disabled>Kitchen</button>
         <button onclick="navigate('prestige')" id="prestige_tab_button" disabled>Prestige</button>
+        <button onclick="navigate('potatopedia')" id="potatopedia_tab_button" disabled>Potatopedia</button>
         <button onclick="navigate('achievement')" id="achievement_tab_button" disabled>Achievements</button>
-        <button disabled>Settings (WIP)</button>
+        <button onclick="navigate('settings')" id="settings_tab_button">Settings</button>
         <button onclick="saveGame()">Save</button>
         <button onclick="loadGame()">Load</button>
         <button onclick="hardReset()" style="color:#b00;">RESET</button>
@@ -122,12 +126,12 @@
           <h3>- The Lab -</h3>
           <p>Research</p>
           <button onclick="seedResearch()" id="seed_research">Research Seeds <br>1<span><img src='sprites/seeds_icon.png' class='small_icon'></img></span></button>
-          <button onclick="seedResearchMax()" id="seed_research_max" style="display:none;">Max</button><br>
+          <button onclick="seedResearchMax()" id="seed_research_max" style="display:none;">Use Max</button><br>
           <button onclick="potatoStudy()" id="potato_study">Study your potato [0/5]</button>
           <p>DNA Upgrades</p>
           <button onclick="seedUpgrade()" id="seed_upgrade">Seeds per potato [2]<br>1<span><img src='sprites/dna_icon.png' class='small_icon'></img></span></button><br>
           <button onclick="speedUpgrade()" id="speed_upgrade">Growth speed [1]<br>1<span><img src='sprites/dna_icon.png' class='small_icon'></img></span></button><br>
-          <button onclick="cloning()" id="cloning_upgrade">Cloning<br>500000<span><img src='sprites/dna_icon.png' class='small_icon'></img></span></button>
+          <button onclick="cloning()" id="cloning_upgrade">Cloning<br>500 000<span><img src='sprites/dna_icon.png' class='small_icon'></img></span></button>
           <br>
         </div>
 
@@ -154,19 +158,75 @@
           </table><br>
           <button onclick="makeBakedPotato()" id="make_baked_potato">Bake Your Potato</button>
           <button onclick="makeFries()" id="make_fries" disabled>Make Fries</button>
-          <button onclick="makeChips()" id="make_chips" disabled>Make Chips</button>
+          <button onclick="makeChips()" id="make_chips" disabled>Make Chips</button><br>
+          <div id="autocooker_div" style="display:none">
+          <h3>- Autocooker (not microwave) -</h3>
+          <table style="width:300px;height:130px;">
+            <tr>
+              <td style="background:#cce;width:180px;vertical-align:middle;text-align:center;" id="microwave_inside"></td>
+              <td>
+                <table>
+                  <tr style="height:20px;">
+                    <td><button onclick="autoCook(1)" id="auto_cook_1" class="microwave_button">1</td>
+                    <td><button onclick="autoCook(2)" id="auto_cook_2" class="microwave_button">2</button></td>
+                  </tr>
+                  <tr style="height:20px;">
+                    <td><button onclick="autoCook(3)" id="auto_cook_3" disabled></button></td>
+                    <td><button style="height:15px;" disabled></button></td>
+                  </tr>
+                  <tr style="height:20px;">
+                    <td><button style="height:15px;" disabled></button></td>
+                    <td><button style="height:15px;" disabled></button></td>
+                  </tr>
+                  <tr style="height:20px;">
+                    <td><button style="height:15px;" disabled></button></td>
+                    <td><button style="height:15px;" disabled></button></td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+          </table>
+        </div>
         </div>
         <div id="prestige_tab" style="display:none;">
           <button onclick="prestige()">MASH YOUR POTATO</button>
           <p>Mashing your potatoes resets most things but you will gain powerful mashed potatoes which multiply your growth speed quadratically (very strong boost) and can be used for special upgrades<br>(It is strongly recommended to have your highest available potato when mashing)</p>
           <h3>- Mashed Potatoes -</h3>
           <p id="mashed_potatoes_info">You have 0 mashed potatoes, granting you a bonus 1x potato growth speed</p>
-          <button id="prestige_upgrade_data" onclick="prestigeUpgradeData()">Data Decryption<br>2<span><img src='sprites/mashed_potato_icon.png' class='small_icon'></img></span></button><br>
           <button id="prestige_upgrade_automators_retained" onclick="prestigeUpgradeAutomatorsRetained()">Robotic Retainment<br>10<span><img src='sprites/mashed_potato_icon.png' class='small_icon'></img></span></button><br>
-          <button disabled>Contemporary Cuisine (WIP)<br>200<span><img src='sprites/mashed_potato_icon.png' class='small_icon'></img></span></button><br>
+          <button id="prestige_upgrade_auto_cook" onclick="prestigeUpgradeAutoCook()">Contemporary Cuisine<br>200<span><img src='sprites/mashed_potato_icon.png' class='small_icon'></img></span></button><br>
           <button id="prestige_upgrade_study_req" onclick="prestigeUpgradeStudyReq()">Swift Studies [0/4]<br>5<span><img src='sprites/mashed_potato_icon.png' class='small_icon'></img></span></button><br>
-          <h3>Something else?? [COMING SOON]</h3>
+          <h3>Something else?? [COMING V0.4]</h3>
           <button disabled="true">Trade 1 mashed potatoes<br>for ???? ??????????</button>
+        </div>
+        <div id="potatopedia_tab" style="display:none;">
+          <h3>- Potatopedia -</h3>
+          <table style="width:0px;">
+            <tr>
+              <td style="width:0px;padding:0px;"><img id="potatopedia_1" src='sprites/locked_potatopedia.png' class="potatopedia_icon" onclick="ppFocus(1)"></img></td>
+              <td style="width:0px;padding:0px;"><img id="potatopedia_2" src='sprites/locked_potatopedia.png' class="potatopedia_icon" onclick="ppFocus(2)"></img></td>
+              <td style="width:0px;padding:0px;"><img id="potatopedia_3" src='sprites/locked_potatopedia.png' class="potatopedia_icon" onclick="ppFocus(3)"></img></td>
+              <td style="width:0px;padding:0px;"><img id="potatopedia_4" src='sprites/locked_potatopedia.png' class="potatopedia_icon" onclick="ppFocus(4)"></img></td>
+              <td style="width:0px;padding:0px;"><img id="potatopedia_5" src='sprites/locked_potatopedia.png' class="potatopedia_icon" onclick="ppFocus(5)"></img></td>
+              <td style="width:0px;padding:0px;"><img id="potatopedia_6" src='sprites/locked_potatopedia.png' class="potatopedia_icon" onclick="ppFocus(6)"></img></td>
+              <td style="width:0px;padding:0px;"><img id="potatopedia_7" src='sprites/locked_potatopedia.png' class="potatopedia_icon" onclick="ppFocus(7)"></img></td>
+              <td style="width:0px;padding:0px;"><img id="potatopedia_8" src='sprites/locked_potatopedia.png' class="potatopedia_icon" onclick="ppFocus(8)"></img></td>
+            </tr>
+            <tr>
+              <td style="width:0px;padding:0px;"><img id="potatopedia_9" src='sprites/locked_potatopedia.png' class="potatopedia_icon" onclick="ppFocus(9)"></img></td>
+              <td style="width:0px;padding:0px;"><img id="potatopedia_10" src='sprites/locked_potatopedia.png' class="potatopedia_icon" onclick="ppFocus(10)"></img></td>
+              <td style="width:0px;padding:0px;"><img id="potatopedia_11" src='sprites/locked_potatopedia.png' class="potatopedia_icon" onclick="ppFocus(11)"></img></td>
+              <td style="width:0px;padding:0px;"><img id="potatopedia_12" src='sprites/locked_potatopedia.png' class="potatopedia_icon" onclick="ppFocus(12)"></img></td>
+              <td style="width:0px;padding:0px;"><img id="potatopedia_13" src='sprites/locked_potatopedia.png' class="potatopedia_icon" onclick="ppFocus(13)"></img></td>
+              <td style="width:0px;padding:0px;"><img id="potatopedia_14" src='sprites/locked_potatopedia.png' class="potatopedia_icon" onclick="ppFocus(14)"></img></td>
+              <td style="width:0px;padding:0px;"><img id="potatopedia_15" src='sprites/locked_potatopedia.png' class="potatopedia_icon" onclick="ppFocus(15)"></img></td>
+              <td style="width:0px;padding:0px;"><img id="potatopedia_16" src='sprites/locked_potatopedia.png' class="potatopedia_icon" onclick="ppFocus(16)"></img></td>
+            </tr>
+          </table>
+          <div id="potatopedia_infodiv" style="display:none;">
+            <h3 id="potatopedia_infodiv_header"></h3>
+            <p id="potatopedia_infodiv_content"></p>
+          </div>
         </div>
         <div id="achievement_tab" style="display:none;">
           <h3>- Achievements -</h3>
@@ -194,6 +254,7 @@
               <td id="achievement_4_0">
                 <b>Robust</b><br><br>
                 Harvest a robust potato<br><br>
+                (unlocks the potatopedia)
               </td>
               <td id="achievement_5_0">
                 <b>Smooth</b><br><br>
@@ -270,7 +331,7 @@
                 <b>Time spent wisely</b><br><br>
                 Play for 50 hours<br><br>
               </td>
-              <td id="achievement_6_2" style="background:#f88;">
+              <td id="achievement_6_2">
                 <b>Actually just a microwave</b><br><br>
                 Unlock contemporary cuisine<br><br>
               </td>
@@ -280,6 +341,12 @@
               </td>
             </tr>
           </table>
+        </div>
+        <div id="settings_tab" style="display:none;">
+          <h3>- Settings -</h3>
+          <button onclick="progressBarStyle()" id="progress_bar_style_setting">Progress Bars:<br><p style="color:#f00;display:inline;">F</p><p style="color:#f80;display:inline;">a</p><p style="color:#0b0;display:inline;">n</p><p style="color:#0bb;display:inline;">c</p><p style="color:#00f;display:inline;">y</p></button>
+          <button onclick="numberNotationType()" id="number_notation_setting">Number Notation:<br>Scientific (3.26e+76)</button>
+          <button onclick="toggleAutoSave()" id="auto_save_setting">Auto Save: On</button>
         </div>
         </td>
       </tr>
@@ -291,6 +358,6 @@
   <script>
     loadGame()
     newNews()
-    setInterval(saveGame, 20000)
+    setInterval(autoSaveGame, 20000)
   </script>
 </html>

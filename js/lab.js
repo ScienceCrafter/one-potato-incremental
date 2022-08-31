@@ -57,7 +57,7 @@ function seedUpgrade() {
   updateDNAText()
   seed_upgrade_cost = Math.floor(seed_upgrade_cost * 1.05) + 1
   seed_upgrade_level += 1
-  document.getElementById("seed_upgrade").innerHTML = "Seeds per potato [" + (seed_upgrade_level + 2) + "]<br>" + seed_upgrade_cost + icons[1]
+  document.getElementById("seed_upgrade").innerHTML = "Seeds per potato [" + numberFormat((seed_upgrade_level + 2)) + "]<br>" + numberFormat(seed_upgrade_cost) + icons[1]
   awardAchievement(1,0)
 }
 
@@ -69,7 +69,7 @@ function speedUpgrade() {
   updateDNAText()
   speed_upgrade_cost = Math.floor(speed_upgrade_cost * 1.05) + 1
   speed_upgrade_level += 1
-  document.getElementById("speed_upgrade").innerHTML = "Growth speed [" + (speed_upgrade_level + 1) + "]<br>" + speed_upgrade_cost + icons[1]
+  document.getElementById("speed_upgrade").innerHTML = "Growth speed [" + numberFormat((speed_upgrade_level + 1)) + "]<br>" + numberFormat(speed_upgrade_cost) + icons[1]
   awardAchievement(1,0)
 }
 

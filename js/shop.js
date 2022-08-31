@@ -40,7 +40,7 @@ function buyFertilizer() {
   updateCoinsText()
   fertilizer_level += 1
   fertilizer_price *= 100
-  document.getElementById("buy_fertilizer").innerHTML = "Buy fertilizer [" + fertilizer_level + "]<br>" + fertilizer_price + icons[2]
+  document.getElementById("buy_fertilizer").innerHTML = "Buy fertilizer [" + fertilizer_level + "]<br>" + numberFormat(fertilizer_price) + icons[2]
   awardAchievement(2,1)
   //if (fertilizer_level == 5) {
   //  document.getElementById("buy_fertilizer").style.display = "none"
