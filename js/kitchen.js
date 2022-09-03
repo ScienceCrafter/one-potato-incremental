@@ -6,6 +6,7 @@ var fry_bonus = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
 var fry_multiplier = 1
 var auto_cook = false
 var auto_cook_recipie = 0
+var auto_eating = false;
 
 function makeBakedPotato() {
   if (have_potato == false || seeds == 0 || food_type != "none") {
@@ -20,6 +21,9 @@ function makeBakedPotato() {
   document.getElementById("food_options").style.display = "block"
   document.getElementById("eat_food").innerHTML = "Eat It ["+numberFormat(potato_stage_requirements[food_tier-1])+"/1]<br>(-1% growth time for tier " + food_tier + ")"
   awardAchievement(5,1)
+  if (auto_eating) {
+    eatFood();
+  }
 }
 
 function makeFries() {
@@ -35,6 +39,9 @@ function makeFries() {
   document.getElementById("food_options").style.display = "block"
   document.getElementById("eat_food").innerHTML = "Eat Them<br>(+1% coins from food)<br>["+fry_bonus[food_tier-1]+"/"+(100+fry_boost[food_tier-1])+"]"
   awardAchievement(1,2)
+  if (auto_eating) {
+    eatFood();
+  }
 }
 
 function makeChips() {
@@ -50,6 +57,9 @@ function makeChips() {
   document.getElementById("food_options").style.display = "block"
   document.getElementById("eat_food").innerHTML = "Eat Them<br>(" + numberFormat(8**(food_tier-1)) + " coins/min)"
   awardAchievement(4,2)
+  if (auto_eating) {
+    eatFood();
+  }
 }
 
 function removeFood() {
@@ -96,6 +106,16 @@ function eatFood() {
   } else if (food_type == "chips") {
     coins_per_second += (8**(food_tier-1)) / 60
     removeFood()
+  }
+}
+
+function toggleAutoEat() {
+  if (auto_eating == false) {
+    auto_eating = true;
+    document.getElementById("auto_eat_button").innerHTML = "Auto Eat: On";
+  } else {
+    auto_eating = false;
+    document.getElementById("auto_eat_button").innerHTML = "Auto Eat: Off";
   }
 }
 

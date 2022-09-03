@@ -36,6 +36,7 @@ function awardAchievement(x,y) {
   } else if (x == 2 && y == 0) {
     document.getElementById("shop_tab_button").disabled = false
     document.getElementById("sell_potato").style.display = "block"
+    prestige_1_buff = 2;
   } else if (x == 3 && y == 0) {
     document.getElementById("kitchen_tab_button").disabled = false
   } else if (x == 4 && y == 0) {

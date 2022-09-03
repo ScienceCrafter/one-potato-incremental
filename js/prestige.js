@@ -6,6 +6,7 @@ var study_req = 5
 var study_req_cost = 5
 var retain_automators = false
 var autocook_unlocked = false
+var prestige_1_buff = 1;
 
 
 function softReset() {

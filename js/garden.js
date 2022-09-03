@@ -66,7 +66,7 @@ function updatePlotText() {
 
 
 function autoGrow() {
-  growth_progress += (1 + speed_upgrade_level) * (((mashed_potatoes/100)+1)**3.2)
+  growth_progress += (1 + speed_upgrade_level) * (((mashed_potatoes/100)+1)**3.2) * prestige_1_buff;
   if (growth_progress < (potato_stage_requirements[potato_stage] || 1e150)) {
     auto_grow = setTimeout(autoGrow, 100 * (0.8**fertilizer_level))
   } else {

@@ -1,6 +1,6 @@
 <html>
   <head>
-    <title>One Potato Incremental v0.3.0</title>
+    <title>One Potato Incremental v0.3.1</title>
     <script type="text/javascript" src="js/icons.js"></script>
     <script type="text/javascript" src="js/number_format.js"></script>
     <script type="text/javascript" src="js/inventory.js"></script>
@@ -19,7 +19,7 @@
     <link rel="icon" href="sprites/icon.png" type="image/x-icon">
   <head>
   <body>
-    <p>One Potato Incremental, a minimalist farming simulator (v0.3.0)
+    <p>One Potato Incremental, a minimalist farming simulator (v0.3.1)
       <a href="https://discord.gg/GWaSqa6BZn" target="_blank"><button style="color:blue;">Discord<span><img src='sprites/discord_icon.png' class='small_icon'></img></span></button></a>
       <a href="https://www.patreon.com/sciencecrafter" target="_blank"><button style="color:blue;">Patreon<span><img src='sprites/patreon_icon.png' class='small_icon'></img></span></button></a>
     </p>
@@ -114,9 +114,6 @@
         <button onclick="navigate('potatopedia')" id="potatopedia_tab_button" disabled>Potatopedia</button>
         <button onclick="navigate('achievement')" id="achievement_tab_button" disabled>Achievements</button>
         <button onclick="navigate('settings')" id="settings_tab_button">Settings</button>
-        <button onclick="saveGame()">Save</button>
-        <button onclick="loadGame()">Load</button>
-        <button onclick="hardReset()" style="color:#b00;">RESET</button>
         </td>
       </tr>
 
@@ -159,6 +156,7 @@
           <button onclick="makeBakedPotato()" id="make_baked_potato">Bake Your Potato</button>
           <button onclick="makeFries()" id="make_fries" disabled>Make Fries</button>
           <button onclick="makeChips()" id="make_chips" disabled>Make Chips</button><br>
+          <button onclick="toggleAutoEat()" id="auto_eat_button">Auto Eat: Off</button><br>
           <div id="autocooker_div" style="display:none">
           <h3>- Autocooker (not microwave) -</h3>
           <table style="width:300px;height:130px;">
@@ -190,7 +188,7 @@
         </div>
         <div id="prestige_tab" style="display:none;">
           <button onclick="prestige()">MASH YOUR POTATO</button>
-          <p>Mashing your potatoes resets most things but you will gain powerful mashed potatoes which multiply your growth speed quadratically (very strong boost) and can be used for special upgrades<br>(It is strongly recommended to have your highest available potato when mashing)</p>
+          <p>Mashing your potato resets most things but you will gain powerful mashed potatoes which will grant bigger and bigger bonuses the more you get. They can be used for special upgrades<br>(It is strongly recommended to have your highest available potato when mashing)<br>Each food you have maxed out will be buffed in the next prestige aswell</p>
           <h3>- Mashed Potatoes -</h3>
           <p id="mashed_potatoes_info">You have 0 mashed potatoes, granting you a bonus 1x potato growth speed</p>
           <button id="prestige_upgrade_automators_retained" onclick="prestigeUpgradeAutomatorsRetained()">Robotic Retainment<br>10<span><img src='sprites/mashed_potato_icon.png' class='small_icon'></img></span></button><br>
@@ -308,7 +306,7 @@
             <tr>
               <td id="achievement_0_2">
                 <b>Twice baked, twice lived</b><br><br>
-                Mash your potato<br><br>
+                Mash your potato (reward: x2 growth speed)<br><br>
               </td>
               <td id="achievement_1_2">
                 <b>Also known as chips</b><br><br>
@@ -347,6 +345,10 @@
           <button onclick="progressBarStyle()" id="progress_bar_style_setting">Progress Bars:<br><p style="color:#f00;display:inline;">F</p><p style="color:#f80;display:inline;">a</p><p style="color:#0b0;display:inline;">n</p><p style="color:#0bb;display:inline;">c</p><p style="color:#00f;display:inline;">y</p></button>
           <button onclick="numberNotationType()" id="number_notation_setting">Number Notation:<br>Scientific (3.26e+76)</button>
           <button onclick="toggleAutoSave()" id="auto_save_setting">Auto Save: On</button>
+          <button onclick="toggleNews()" id="news_setting">News Ticker: Ticking</button><br>
+          <button onclick="saveGame()">Save</button>
+          <button onclick="loadGame()">Load</button>
+          <button onclick="hardReset()" style="color:#b00;">RESET</button>
         </div>
         </td>
       </tr>

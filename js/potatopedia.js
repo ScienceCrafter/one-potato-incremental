@@ -1,4 +1,4 @@
-var best_potato_seen = 1 // that's got to be the best potato i've ever seen!
+var best_potato_seen = 0 // that's got to be the best potato i've ever seen!
 var pp_focus = 0 // potatopedia focus
 
 var potato_stages_alt = [

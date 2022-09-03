@@ -1,6 +1,7 @@
 
 var progress_bar_style = "fancy"
 var auto_saving = true
+var news_enabled = true
 //var notation = "scientific" (declared earlier)
 
 function progressBarStyle() {
@@ -32,5 +33,17 @@ function toggleAutoSave() {
   } else {
     document.getElementById("auto_save_setting").innerHTML = "Auto Save: On"
     auto_saving = true;
+  }
+}
+
+function toggleNews() {
+  if (news_enabled == true) {
+    news_enabled = false;
+    document.getElementById("news_bar").style.display = "none";
+    document.getElementById("news_setting").innerHTML = "News Ticker: Halted";
+  } else {
+    news_enabled = true;
+    document.getElementById("news_bar").style.display = "revert";
+    document.getElementById("news_setting").innerHTML = "News Ticker: Ticking";
   }
 }

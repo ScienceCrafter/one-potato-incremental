@@ -43,8 +43,10 @@ function seedResearchMax() {
   }
   document.getElementById("seed_research").innerHTML = "Research Seeds <br>" + 10 + icons[0]
   if (seeds <= 0) {
-    seeds += 1
-    updateSeedsText()
+    seeds += 10;
+    potato_dna -= 1;
+    updateSeedsText();
+    updateDNAText();
   }
 }
 
