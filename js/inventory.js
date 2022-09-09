@@ -171,7 +171,7 @@ function loadGame() {
   document.getElementById("plant_auto").checked = false;
   document.getElementById("make_seeds_auto").checked = false;
   fertilizer_level = Number(localStorage.getItem("local_fertilizer_level"))
-  fertilizer_price = Number(localStorage.getItem("local_fertilizer_price"))
+  fertilizer_price = numberFormat(Number(localStorage.getItem("local_fertilizer_price")))
   // prestige stuff
   baked_potato_boost = localStorage.getItem("local_baked_potato_boost").split(",")
   for (i in baked_potato_boost) {baked_potato_boost[i] = Number(baked_potato_boost[i])}
@@ -192,10 +192,10 @@ function loadGame() {
   if (seed_research_cost == 10) {
     document.getElementById("seed_research_max").style.display = "inline-block"
   }
-  document.getElementById("seed_upgrade").innerHTML = "Seeds per potato [" + (seed_upgrade_level + 2) + "]<br>" + seed_upgrade_cost + icons[1]
-  document.getElementById("speed_upgrade").innerHTML = "Growth speed [" + (speed_upgrade_level + 1) + "]<br>" + speed_upgrade_cost + icons[1]
-  document.getElementById("buy_fertilizer").innerHTML = "Buy fertilizer [" + fertilizer_level + "]<br>" + fertilizer_price + icons[2]
-  document.getElementById("prestige_upgrade_study_req").innerHTML = "Swift Studies ["+(5-study_req)+"/4]<br>"+study_req_cost+"<span><img src='sprites/mashed_potato_icon.png' class='small_icon'></img></span>"
+  document.getElementById("seed_upgrade").innerHTML = "Seeds per potato [" + (seed_upgrade_level + 2) + "]<br>" + numberFormat(seed_upgrade_cost) + icons[1]
+  document.getElementById("speed_upgrade").innerHTML = "Growth speed [" + (speed_upgrade_level + 1) + "]<br>" + numberFormat(speed_upgrade_cost) + icons[1]
+  document.getElementById("buy_fertilizer").innerHTML = "Buy fertilizer [" + fertilizer_level + "]<br>" + numberFormat(fertilizer_price) + icons[2]
+  document.getElementById("prestige_upgrade_study_req").innerHTML = "Swift Studies ["+(5-study_req)+"/4]<br>"+numberFormat(study_req_cost)+"<span><img src='sprites/mashed_potato_icon.png' class='small_icon'></img></span>"
   if (study_req == 1) {
     document.getElementById("prestige_upgrade_study_req").disabled = "true"
   }
